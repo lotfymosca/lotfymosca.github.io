@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #code-view {
+  background-color: #f0f0f0;
+  padding: 16px;
+}
+
+#code {
+  background-color: #fff;
+  padding: 8px;
+}
+
+#copy-btn {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div id="code-view">
+        <pre>
+          <code id="code">
+            // Your code here
+          </code>
+        </pre>
+        <button id="copy-btn">Copy</button>
+      </div>
+      <script>
+// the javascript code of the copy button of the code in the text view
+const copyBtn = document.getElementById("copy-btn");
+// the javascript code of the code text view 
+const code = document.getElementById("code");
+
+copyBtn.addEventListener("click", () => {
+  const text = code.textContent;
+  navigator.clipboard.writeText(text);
+});
+      </script>      
+</body>
+</html>

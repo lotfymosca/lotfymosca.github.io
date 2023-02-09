@@ -1,50 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        #code-view {
-  background-color: #f0f0f0;
-  padding: 16px;
-}
-
-#code {
-  background-color: #fff;
-  padding: 8px;
-}
-
-#copy-btn {
-  background-color: #007bff;
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+li {
+  font-size: 20px;
+  font-family: Arial, sans-serifs;
+  border: 3px solid gray;
+  border-radius: 5px;
+  margin: 10px 0;
   cursor: pointer;
+  list-style: none;
 }
 
-    </style>
-</head>
-<body>
-    <div id="code-view">
-        <pre>
-          <code id="code">
-            // Your code here
-          </code>
-        </pre>
-        <button id="copy-btn">Copy</button>
-      </div>
-      <script>
-// the javascript code of the copy button of the code in the text view
-const copyBtn = document.getElementById("copy-btn");
-// the javascript code of the code text view 
-const code = document.getElementById("code");
+li:hover {
+   background-color: lightgray;
+   text-decoration: underline;
+}
 
-copyBtn.addEventListener("click", () => {
-  const text = code.textContent;
-  navigator.clipboard.writeText(text);
-});
-      </script>      
-</body>
-</html>
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#inputField {
+   font-size: 18px;
+   padding: 5px;
+   border: 1px solid gray;
+   border-radius: 5px;
+   margin-bottom: 10px;
+   margin-left: 2%;
+   margin-right: 2%;
+}
+
+#addButton {
+    font-size: 18px;
+	padding: 5px 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: lightgray;
+	cursor: pointer;
+	}
+	
+	#addButton:hover {
+	background-color: gray;
+	}
+
+	#div2{
+	border: 5px solid lightgray;
+	text-align: center;
+	padding:inherit;
+	}
+	
+	</style>
+	</head>
+	<body>
+	<div id="container">
+	<input id="inputField" type="text">
+	<button id="addButton">Add</button>
+	<ul id="list"></ul>
+	</div>
+
+
+	<section>
+	<div id="div2">
+      <span>
+	lotfy mosca is the best android developer in the world 
+      </span>
+	</div>
+	</section>
+	
+	<script>
+	
+	document.getElementById('addButton').addEventListener('click', () => {
+	const inputField = document.getElementById('inputField');
+	const text = inputField.value;
+	if (text) {
+	const list = document.getElementById('list');
+	const item = document.createElement('li');
+	item.textContent = text;
+	list.appendChild(item);
+	inputField.value = '';
+	}
+	});
+	
+	document.getElementById('container').addEventlistener('click', event => {
+	if (event.target.tagName === 'LI'){
+	event.targer.remove();
+	}
+	});
+	</script>

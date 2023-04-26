@@ -1,0 +1,130 @@
+/* Header  */
+
+.header-img {
+    position: absolute;
+    width: 407px;
+    height: 407px;
+    left: 217px;
+    top: 179px;
+}
+
+/* Navbar  */
+
+.navbar-img {
+    height: 2em;
+    width: 300px;
+}
+
+/* Body  */
+
+body {
+    margin: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Heading  */
+
+.heading {
+    font-family: 'Bebas Neue', cursive;
+}
+
+.penguin-card {
+    border: none !important;
+}
+
+.penguin-card-footer {
+    background-color: white !important;
+    border: 0 !important;
+}
+
+.categories img {
+    width: 100px;
+}
+
+.penguin-slide {
+    background-color: #FCEAE8;
+    border-radius: 1em;
+}
+
+/* Button  */
+
+.link-button {
+    background-color: rgb(66, 66, 184);
+    padding: 20px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    height: 60px;
+    width: 170px;
+    left: 1121px;
+    top: 1310px;
+    text-align: end;
+}
+
+/* Box-Shadow */
+
+.box-shadow {
+    left: 936px;
+    top: 843px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+}
+
+/* Price Color  */
+
+.price-color {
+    color: tomato;
+    font-weight: 700;
+}
+
+/* About Section */
+
+.about-height {
+    height: 70px;
+}
+
+/* Contact Section Start  */
+
+.form-container {
+    background-color: #FFF9F4;
+}
+
+.inner-form {
+    background-color: #FFF9F4;
+}
+
+.bg-redtype {
+    background-color: #fb857f;
+}
+
+.bg-redtype:hover {
+    color: black !important;
+}
+
+/* Contact Section End  */
+
+/* Footer Section  */
+
+.footer {
+    text-align: center;
+    background-color: turquoise;
+    color: white;
+    font-weight: 700;
+}
+.email-box{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgb(162, 51, 31);
+    border-radius: 10px;
+}
+
+
+
+#msg-box{
+    width: 200px;
+    border: 2px solid rgb(162, 51, 31)  ;
+    border-radius:10px ;
+}

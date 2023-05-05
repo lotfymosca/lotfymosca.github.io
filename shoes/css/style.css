@@ -1,0 +1,210 @@
+/* Header  */
+
+.header-img {
+    position: absolute;
+    width: 407px;
+    height: 407px;
+    left: 217px;
+    top: 179px;
+}
+.btn{
+    background-color: rgb(66, 66, 184);
+    padding: 20px 20px  ;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    height: 60px;
+    width: 170px;
+    left: 1121px;
+    top: 1310px;
+    text-align: center;
+}
+.form{
+    
+    font-weight: bolder;
+    border: 5px solid  #ecdccf;
+    border-radius: 8px;
+}
+.btn2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.div{
+    background-color: rgb(66, 66, 184);
+    padding: 20px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 400;
+    height: 60px;
+    width: 170px;
+    left: 1121px;
+    top: 1310px;
+    text-align: center; 
+    margin-left: 20%;
+}
+.waheed{
+    margin-top: 20px;
+}
+.text{
+    font-size: 500px;
+}
+.container {
+    background-color:#ecdccf;
+}
+.carouselExampleSlidesOnly{
+    margin-top: 2px;
+}
+
+/* Navbar  */
+.lotfy {
+    margin-bottom: 2px;
+    background-color: rgb(255, 255, 255);
+}
+.collapse{
+    margin-bottom: 2px;
+    color: white;
+}
+.navbar-img {
+    height: 3em;
+    width: 90px;
+}
+
+/* Body  */
+
+body {
+    margin: 0;
+    font-family: 'Bebas Neue', cursive;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Heading  */
+
+.heading {
+    font-family: 'Bebas Neue', cursive;
+}
+
+.penguin-card {
+    border: none !important;
+}
+
+.penguin-card-footer {
+    background-color: white !important;
+    border: 0 !important;
+}
+
+.categories img {
+    width: 100px;
+}
+
+.penguin-slide {
+    background-color: #FCEAE8;
+    border-radius: 1em;
+}
+body.dark-mode {
+    background-color: #1f1f1f;
+    color: #ffffff;
+  }
+  .mosca {
+    background-color: #ffffff;
+    color: #000000;
+    padding-left: 5px;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .mosca:hover {
+    background-color: #000000;
+    color: #ffffff;
+    border-radius:10px;
+  }
+
+/* Button  */
+
+.link-button {
+    background-color: rgb(66, 66, 184);
+    padding: 20px 20px  ;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    height: 60px;
+    width: 170px;
+    left: 1121px;
+    top: 1310px;
+    text-align: end;
+}
+
+/* Box-Shadow */
+
+.box-shadow {
+    left: 936px;
+    top: 843px;
+    border-radius: 20px;
+    background: transparent;
+    box-shadow: 0px 10px 30px rgba(204, 0, 0, 0.05);
+    border-radius: 10px;
+}
+/* Price Color  */
+.price-color {
+    color: tomato;
+    font-weight: 700;
+}
+/* About Section */
+.about-height {
+    height: 70px;
+}
+/* Contact Section Start  */
+.form-container {
+    margin-top: 40px;
+    background-color: #FFF9F4;
+    border: 2px solid #ecdccf ;
+    border-radius: 10px;
+}
+.inner-form {
+    background-color: #FFF9F4;
+}
+.card-body{
+    height: min-content;
+}
+.bg-redtype {
+    background-color: #fb857f;
+}
+.bg-redtype:hover {
+    color: black !important;
+}
+/* Contact Section End  */
+/* Footer Section  */
+.footer {
+    text-align: center;
+    background-color: #ecdccf;
+    color: rgb(66, 45, 45);
+    font-weight: 900;
+    font-size: large;
+}
+.email-box{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border: 2px solid rgb(162, 51, 31);
+    border-radius: 10px;
+}
+#msg-box{
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(162, 51, 31)  ;
+    border-radius:10px ;
+    margin-top: 5px;
+}
+.headimg{
+    width: 90%;
+    height: 100%;
+}
+.card-img-top{
+   width: 100%;
+   height: 70%; 
+}
+.intro{
+    width: 40%;
+}

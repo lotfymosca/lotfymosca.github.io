@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Cards</title>
+    <style>
+        :root {
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-background: #fff;
+            --card-shadow: rgba(0, 0, 0, 0.2);
+            --button-background: #007bff;
+            --button-hover: #0056b3;
+        }
+
+        [data-theme="dark"] {
+            --background-color: #121212;
+            --text-color: #f4f4f4;
+            --card-background: #1e1e1e;
+            --card-shadow: rgba(0, 0, 0, 0.7);
+            --button-background: #1a73e8;
+            --button-hover: #1358a7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .sticky-menu {
+            position: sticky;
+            top: 0;
+            background: var(--card-background);
+            box-shadow: 0 4px 8px var(--card-shadow);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .sticky-menu select {
+            background-color: var(--card-background);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .sticky-menu select:hover {
+            background-color: var(--button-background);
+            color: #fff;
+        }
+
+        h1 {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .theme-toggle {
+            margin: 10px;
+            padding: 10px 20px;
+            background: var(--button-background);
+            color: var(--text-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--button-hover);
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .subject-section {
+            display: none;
+        }
+
+        .subject-section.active {
+            display: block;
+        }
+
+        .subject-section .section-menu {
+            position: sticky;
+            top: 0;
+            background: var(--card-background);
+            box-shadow: 0 4px 8px var(--card-shadow);
+            z-index: 1000;
+            display: flex;
+            overflow-x: auto;
+            padding: 10px 0;
+            white-space: nowrap;
+        }
+
+        .subject-section .section-menu button {
+            margin: 0 15px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .subject-section .section-menu button:hover {
+            color: var(--button-background);
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: 8px;
+            box-shadow: 0 6px 12px var(--card-shadow);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, opacity 0.5s ease;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .card-content h3 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+        }
+
+        .card-content p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .card-content .download-btn {
+            margin-top: 10px;
+            display: inline-block;
+            background: var(--button-background);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .card-content .download-btn:hover {
+            background: var(--button-hover);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="sticky-menu">
+        <select onchange="showSection(this.value)">
+            <option value="">Select a Subject</option>
+            <option value="mathematics">Mathematics</option>
+            <option value="physics">Physics</option>
+        </select>
+    </div>
+
+    <h1>PDF Viewer</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Dark Mode</button>
+
+    <div id="mathematics" class="subject-section">
+        <div class="section-menu">
+            <button onclick="filterCards('mathematics-algebra')">Algebra</button>
+            <button onclick="filterCards('mathematics-geometry')">Geometry</button>
+        </div>
+        <div class="cards-container">
+            <div class="card mathematics mathematics-algebra">
+                <img src="page1-preview.jpg" alt="First Page Preview">
+                <div class="card-content">
+                    <h3>File Name: Algebra1.pdf</h3>
+                    <p>Subject: Algebra</p>
+                    <a href="files/Algebra1.pdf" download class="download-btn">Download</a>
+                </div>
+            </div>
+
+            <div class="card mathematics mathematics-geometry">
+                <img src="page2-preview.jpg" alt="First Page Preview">
+                <div class="card-content">
+                    <h3>File Name: Geometry1.pdf</h3>
+                    <p>Subject: Geometry</p>
+                    <a href="files/Geometry1.pdf" download class="download-btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="physics" class="subject-section">
+        <div class="section-menu">
+            <button onclick="filterCards('physics-mechanics')">Mechanics</button>
+            <button onclick="filterCards('physics-optics')">Optics</button>
+        </div>
+        <div class="cards-container">
+            <div class="card physics physics-mechanics">
+                <img src="page3-preview.jpg" alt="First Page Preview">
+                <div class="card-content">
+                    <h3>File Name: Mechanics1.pdf</h3>
+                    <p>Subject: Mechanics</p>
+                    <a href="files/Mechanics1.pdf" download class="download-btn">Download</a>
+                </div>
+            </div>
+
+            <div class="card physics physics-optics">
+                <img src="page4-preview.jpg" alt="First Page Preview">
+                <div class="card-content">
+                    <h3>File Name: Optics1.pdf</h3>
+                    <p>Subject: Optics</p>
+                    <a href="files/Optics1.pdf" download class="download-btn">Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        function showSection(subject) {
+            const sections = document.querySelectorAll('.subject-section');
+            sections.forEach(section => {
+                if (section.id === subject) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+
+        function filterCards(topic) {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (card.classList.contains(topic)) {
+                    card.classList.remove('hidden');
+                    setTimeout(() => card.classList.add('visible'), 50);
+                } else {
+                    card.classList.remove('visible');
+                    setTimeout(() => card.classList.add('hidden'), 300);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

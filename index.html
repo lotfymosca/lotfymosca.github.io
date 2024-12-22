@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,7 +157,7 @@
             font-size: 14px;
         }
 
-        .card-content .download-btn {
+        .card-content .download-btn {   
             margin-top: 10px;
             display: inline-block;
             background: var(--button-background);
@@ -174,6 +175,9 @@
         .hidden {
             display: none;
         }
+        p{
+            text-align: center;
+        }
     </style>
 </head>
 <body data-theme="dark">
@@ -186,6 +190,8 @@
     </div>
 
     <h1>Mathematics Teacher</h1>
+        <p>&copy; 2024 Lotfy Waheed . All Rights Reserved.</p>
+    
     <button class="theme-toggle" onclick="toggleTheme()">Toggle light Mode</button>
 
     <div id="mathematics" class="subject-section">
@@ -239,10 +245,7 @@
             </div>
         </div>
     </div>
- <footer>
-        <p>&copy; 2024 Lotfy Waheed. All Rights Reserved.</p>
-    </footer>
-
+ 
     <script>
         function toggleTheme() {
             const currentTheme = document.body.getAttribute('data-theme');

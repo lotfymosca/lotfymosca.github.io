@@ -1,280 +1,486 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Cards</title>
-    <style>
-        :root {
-            --background-color: #f4f4f4;
-            --text-color: #333;
-            --card-background: #fff;
-            --card-shadow: rgba(0, 0, 0, 0.2);
-            --button-background: #007bff;
-            --button-hover: #0056b3;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lotfy waheed platform</title>
+  <style>
+    body {
+      display: grid;
+      align-items: center;
+      align-content: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #bfbbbb;
+      color: white;
+    }
+
+    .select-menu {
+      display: flex;
+      text-align: right;
+      position: sticky;
+      justify-content: center;
+      top: 0;
+      background-color: #333;
+      font-style: italic;
+      color: orange;
+      padding: 10px;
+      border-bottom: 2px solid #ccc;
+      z-index: 1000;
+      height: 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .select-menu select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 150px;
+      margin-left: 20px;
+    }
+    .content{
+      display: flex;
+      align-items: center;
+      justify-content: center;
         }
 
-        [data-theme="dark"] {
-            --background-color: #121212;
-            --text-color: #f4f4f4;
-            --card-background: #1e1e1e;
-            --card-shadow: rgba(0, 0, 0, 0.7);
-            --button-background: #1a73e8;
-            --button-hover: #1358a7;
-        }
+    .content section {
+      display: none;
+      padding: 50px 20px;
+      border: 1px solid #ccc;
+      margin-left: 20px;
+      margin-top: 10px;
+      background-color: rgb(210, 177, 138);
+      width:100%;
+      margin-right: 20px;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0px 2px 20px black;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--background-color);
-            color: var(--text-color);
-        }
+    section.active {
+      display: block;
+    }
 
-        .sticky-menu {
-            position: sticky;
-            top: 0;
-            background: var(--card-background);
-            box-shadow: 0 4px 8px var(--card-shadow);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            margin: 0;
-        }
+    h2 {
+      text-align: center;
+    }
 
-        .sticky-menu select {
-            background-color: var(--card-background);
-            color: var(--text-color);
-            border: 1px solid var(--text-color);
-            padding: 8px 16px;
-            cursor: pointer;
-            font-size: 16px;
-        }
+    .question {
+      margin-top: 20px;
+    }
 
-        .sticky-menu select:hover {
-            background-color: var(--button-background);
-            color: #fff;
-        }
+    .question h3 {
+      margin: 10px 0;
+    }
 
-        h1 {
-            margin-top: 20px;
-            text-align: center;
-        }
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
 
-        .theme-toggle {
-            margin: 10px;
-            padding: 10px 20px;
-            background: var(--button-background);
-            color: var(--text-color);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
+    .submit-btn, .next-btn, .prev-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
 
-        .theme-toggle:hover {
-            background: var(--button-hover);
-        }
+    .submit-btn:hover, .next-btn:hover, .prev-btn:hover {
+      background-color: #45a049;
+    }
 
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-        }
+    .result-container {
+      justify-content: center;
+      align-items: center;
+      text-align:left;
+      margin: 20px auto;
+      max-width: 800px;
+      margin-right: 15px;
+      margin-left:15px ;
+      padding: 20px;
+      border: 2px solid #ccc;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0 2px 20px black;
+      display: grid;
+    }
+    .result-container h2{
+      margin: 0;
+      margin-bottom: 5px;
+    }
+    .result-container #hr3{
+      margin-bottom: 50px;
+    }
 
-        .subject-section {
-            display: none;
-        }
+    .result {
+      margin-bottom: 10px;
+    }
 
-        .subject-section.active {
-            display: block;
-        }
+    .correct-answer {
+      color: green;
+    }
 
-        .subject-section .section-menu {
-            position: sticky;
-            top: 0;
-            background: var(--card-background);
-            box-shadow: 0 4px 8px var(--card-shadow);
-            z-index: 1000;
-            display: flex;
-            overflow-x: auto;
-            padding: 10px 0;
-            white-space: nowrap;
+    .incorrect-answer {
+      color: red;
+    }
+    h2{
+      margin-left: 0px;
+      margin-top: 4px;
+    }
+    hr{
+      width: 80px;
+      height: 3px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      background-color: #333;
+    }
+    span{
+      font-weight: 800;
+      font-style: italic;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+      margin-top: 10px;
+      margin-left: 20px;
+      font-weight: 800;
+      font-style: oblique;
+      font-size: 22px;
         }
-
-        .subject-section .section-menu button {
-            margin: 0 15px;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 0.3s;
+        .exp{
+          font-weight: 800;
+          font-style: italic;
+          text-align: center;
         }
-
-        .subject-section .section-menu button:hover {
-            color: var(--button-background);
+        .q-title{
+          font-size: 15px;
+          margin-bottom: 100px;
         }
-
-        .card {
-            background: var(--card-background);
-            border-radius: 8px;
-            box-shadow: 0 6px 12px var(--card-shadow);
-            overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s ease-in-out, opacity 0.5s ease;
-            opacity: 0;
-            transform: scale(0.8);
-        }
-
-        .card.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 15px;
-        }
-
-        .card-content h3 {
-            margin: 10px 0 5px;
-            font-size: 18px;
-        }
-
-        .card-content p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .card-content .download-btn {   
-            margin-top: 10px;
-            display: inline-block;
-            background: var(--button-background);
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .card-content .download-btn:hover {
-            background: var(--button-hover);
-        }
-
-        .hidden {
-            display: none;
-        }
-        p{
-            text-align: center;
-        }
-    </style>
+  </style>
 </head>
-<body data-theme="dark">
-    <div class="sticky-menu">
-        <select onchange="showSection(this.value)">
-            <option value="">Select a Subject</option>
-            <option value="mathematics">Mathematics</option>
-            <option value="physics">Physics</option>
-        </select>
-    </div>
+<body>
+  <div class="select-menu">
+    <h2>Welcome</h2>
+    <select style="display: none;" id="section-selector" onchange="showSection(this.value)">
+      <option value="section1">Section 1</option>
+      <option value="section2">Section 2</option>
+      <option value="section3">Section 3</option>
+      <option value="section4">Section 4</option>
+      <option value="section5">section 5</option>
+      <option value="section6">section 6</option>
+      <option value="section7">section 7</option>
+      <option value="section8">section 8</option>
+      <option value="section9">section 9</option>
+      <option value="section10">section 10</option>
+    </select>
+    <a style="display: none;" href="./index2.html" target="_blank" rel="noopener noreferrer">المقالي</a>
+  </div>
 
-    <h1>Mathematics Teacher</h1>
-        <p>&copy; 2024 Lotfy Waheed . All Rights Reserved.</p>
-    
-    <button class="theme-toggle" onclick="toggleTheme()">Toggle light Mode</button>
-
-    <div id="mathematics" class="subject-section">
-        <div class="section-menu">
-            <button onclick="filterCards('mathematics-algebra')">Algebra</button>
-            <button onclick="filterCards('mathematics-geometry')">Geometry</button>
+  <div class="content">
+    <section id="section1">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">1. تعتبر ......... من اهم المؤسسات الفاعله في صنع السياسات العامه للدولة</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a">الجامعات الدولية </label>
+          <label><input type="radio" name="q1" value="b">المنظمات الدولية</label>
+          <label><input type="radio" name="q1" value="c">البنك الدولي</label>
+          <label><input type="radio" name="q1" value="d">منظمه العمل الدولية</label>
         </div>
-        <div class="cards-container">
-            <div class="card mathematics mathematics-algebra">
-                <img src="page1-preview.jpg" alt="First Page Preview">
-                <div class="card-content">
-                    <h3>File Name: Algebra1.pdf</h3>
-                    <p>Subject: Algebra</p>
-                    <a href="files/Algebra1.pdf" download class="download-btn">Download</a>
-                </div>
-            </div>
+      </div>
+      <button class="next-btn" onclick="nextSection('section2')">Next</button>
+    </section>
 
-            <div class="card mathematics mathematics-geometry">
-                <img src="page2-preview.jpg" alt="First Page Preview">
-                <div class="card-content">
-                    <h3>File Name: Geometry1.pdf</h3>
-                    <p>Subject: Geometry</p>
-                    <a href="files/Geometry1.pdf" download class="download-btn">Download</a>
-                </div>
-            </div>
+    <section id="section2">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">2. هي الهيئات والمؤسسات التي يتكون منها المجتمع الدولي وتشارك في تفعيل اعاده الجماعه الدولية</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a">المنظمات الدولية</label>
+          <label><input type="radio" name="q2" value="b">الجامعات الدولية</label>
+          <label><input type="radio" name="q2" value="c">البنك الدولي</label>
+          <label><input type="radio" name="q2" value="d">منظمه العمل الدولي</label>
         </div>
-    </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section1')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section3')">Next</button>
+    </section>
 
-    <div id="physics" class="subject-section">
-        <div class="section-menu">
-            <button onclick="filterCards('physics-mechanics')">Mechanics</button>
-            <button onclick="filterCards('physics-optics')">Optics</button>
+    <section id="section3">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">3. العناصر المكونه للمنظمات الدولية تتمثل في .........</h3>
+        <div class="options">          
+          <label><input type="radio" name="q3" value="a">الافراد</label>
+          <label><input type="radio" name="q3" value="b">الادارة الفاعله</label>
+          <label><input type="radio" name="q3" value="c">الادوات والتكنولوجيا</label>
+          <label><input type="radio" name="q3" value="d">جميع ما سبق</label>
         </div>
-        <div class="cards-container">
-            <div class="card physics physics-mechanics">
-                <img src="page3-preview.jpg" alt="First Page Preview">
-                <div class="card-content">
-                    <h3>File Name: Mechanics1.pdf</h3>
-                    <p>Subject: Mechanics</p>
-                    <a href="files/Mechanics1.pdf" download class="download-btn">Download</a>
-                </div>
-            </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section2')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section4')">Next</button>
+    </section>
 
-            <div class="card physics physics-optics">
-                <img src="page4-preview.jpg" alt="First Page Preview">
-                <div class="card-content">
-                    <h3>File Name: Optics1.pdf</h3>
-                    <p>Subject: Optics</p>
-                    <a href="files/Optics1.pdf" download class="download-btn">Download</a>
-                </div>
-            </div>
+    <section id="section4">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">4. هم العنصر الجوهري في المنظمه وهم الذين يتفاعلون مع بعضهم البعض  ويصنعون من خلال هذا التفاعل</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> الافراد </label>
+          <label><input type="radio" name="q4" value="b"> الادارة الفاعله</label>
+          <label><input type="radio" name="q4" value="c"> الادوات والتكنولوجيا </label>
+          <label><input type="radio" name="q4" value="d"> لا شئ ما سبق</label>
         </div>
-    </div>
- 
-    <script>
-        function toggleTheme() {
-            const currentTheme = document.body.getAttribute('data-theme');
-            document.body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+      </div>
+      <button class="prev-btn" onclick="prevSection('section3')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section5')">Next</button>
+      
+    </section>
+
+    <section id="section5">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 5. تعد بمثابه العفل الذي تسير بمقتضاه المنزمه فهي التي تصدر القرارات وترسم الخطط وتنظم وتحكم علاقات الافراد</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> الافراد</label>
+          <label><input type="radio" name="q5" value="b"> الادارة الفاعله</label>
+          <label><input type="radio" name="q5" value="c">الادوات والتكنولوجيا</label>
+          <label><input type="radio" name="q5" value="d"> لا شئي مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section4')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section6')">next</button>
+    </section>
+
+    <section id="section6">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 6. هي الوسائل التي تستخدمها المنظمه في اداء عملها وذلك حسب مجال وطبيعة نشاطها وتخصصها </h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="a"> الافراد</label> 
+          <label><input type="radio" name="q6" value="b"> الادارة الفاعله</label>
+          <label><input type="radio" name="q6" value="c">الادوات والتكنولوجيا</label>
+          <label><input type="radio" name="q6" value="d"> لا شئي مما سبق</label> </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section5')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section7')">next</button>
+    </section>
+
+    <section id="section7">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 7.  من ماثله المنظمات الدولية</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="a"> الامم المتحدة للتربية والعوم والثقافه</label>
+          <label><input type="radio" name="q7" value="b"> المنظمة الحقوقيه للتربية والثقافه والعوم</label>
+          <label><input type="radio" name="q7" value="c"> الالسكو</label>
+          <label><input type="radio" name="q7" value="d"> البنك الدولي</label>
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section6')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section8')">next</button>
+    </section>
+    <section id="section8">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 8.  تاسست منظمه اليونسكو عام </h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="a"> 1950</label>
+          <label><input type="radio" name="q8" value="b"> 1945</label>
+          <label><input type="radio" name="q8" value="c"> 1946</label>
+          <label><input type="radio" name="q8" value="d"> 1952</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section7')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section9')">next</button>
+    </section>
+
+    <section id="section9">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 9. منظمة ...... هي منظمة الامم المتحدة للتربية والعلم والثقافه وتتمثل رسالتها في ارسال السلام من خلال التعاون في مجال التربية والعلوم والثقافه</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="a">اليونسكو</label>
+          <label><input type="radio" name="q9" value="b">الالسوك</label>
+          <label><input type="radio" name="q9" value="c">اليونسيف</label>
+          <label><input type="radio" name="q9" value="d">البنك الدولي</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section8')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section10')">next</button>
+    </section>
+    <section id="section10">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 10. من اسباب تاسيس منظمة اليونسكو</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="a">القضاء علي الفقر</label>
+          <label><input type="radio" name="q10" value="b">تحقق التنميه المستدامه</label>
+          <label><input type="radio" name="q10" value="c">اقامه حوار بين الثقافات</label>
+          <label><input type="radio" name="q10" value="d">جميع ما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section9')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section11')">next</button>
+    </section>
+    <section id="section11">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 11. تتراس منظمه .... الفرنسيه اودري ازولاي بعد فوزها في الانتخابات التي اجريت عام 2017 </h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="a">اليونيسكو</label>
+          <label><input type="radio" name="q11" value="b">الالسكو</label>
+          <label><input type="radio" name="q11" value="c">اليونسيف</label>
+          <label><input type="radio" name="q11" value="d">البنك الدولي </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section10')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section12')">next</button>
+    </section>
+
+    <section id="section12">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 12.  تم تشكيل هيئتين دولتين قبل تاسيس منظمة اليونسكو وهما</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q12" value="b">مكتب التربيةالدولي</label>
+          <label><input type="radio" name="q12" value="c">ا وب معاً</label>
+          <label><input type="radio" name="q12" value="d">لا شئ مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section11')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section13')">next</button>
+    </section>
+
+    <section id="section13">
+      <h2>منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 13. اُسست عصبه الامم .... عام 1922 كمنظمه استشارية مقرها جنيف</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q13" value="b">نكتب التربيةالدولي</label>
+          <label><input type="radio" name="q13" value="c">ا وب معاً</label>
+          <label><input type="radio" name="q13" value="d">لا شئ مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section12')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section14')">next</button>
+    </section>
+
+<section id="section14">
+  <p>اضغط للحصول علي النتيجه النهائية</p>
+    <button class="submit-btn" onclick="calculateResult()">Submit</button>
+  </section>
+  </div>
+
+  
+
+
+
+
+  <center>
+<div class="result-box">
+  <div class="result-container" id="result-container">
+    <h2>Quiz Results</h2>
+    <hr id="hr3">
+    <div id="results"></div>
+    <div id="percentage"></div>
+  </div>
+</div>
+</center>
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Show the selected section
+      const selectedSection = document.getElementById(sectionId);
+      if (selectedSection) {
+        selectedSection.classList.add('active');
+      }
+    }
+
+    function nextSection(nextSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const nextSection = document.getElementById(nextSectionId);
+      if (nextSection) {
+        nextSection.classList.add('active');
+      }
+    }
+
+    function prevSection(prevSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const prevSection = document.getElementById(prevSectionId);
+      if (prevSection) {
+        prevSection.classList.add('active');
+      }
+    }
+
+    function calculateResult() {
+      const correctAnswers = {
+        q1: { answer: 'b',},
+        q2: { answer: 'a',},
+        q3: { answer: 'd',},
+        q4: { answer: 'a',},
+        q5: { answer: 'b',},
+        q6: { answer: 'c',},
+        q7: { answer: 'a',},
+        q8: { answer: 'b',},
+        q9: { answer: 'a',},
+        q10:{ answer: 'd',},
+        q11:{ answer: 'a',},
+        q12:{ answer: 'c',},
+        q13:{ answer: 'a',},
+      };
+
+      let score = 0;
+      const totalQuestions = Object.keys(correctAnswers).length;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      for (let question in correctAnswers) {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        const userAnswer = selectedOption ? selectedOption.value : "Not answered";
+        const correctAnswer = correctAnswers[question].answer;
+        const explanation = correctAnswers[question].explanation;
+
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result');
+
+        if (userAnswer === correctAnswer) {
+          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='correct-answer'>${userAnswer}</span> (Correct). <br> <hr>`;
+          score++;
+        } else {
+          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='incorrect-answer'>${userAnswer}</span><br>, Correct Answer: <span class='correct-answer'>(${correctAnswer})</span>.<hr>`;
         }
 
-        function showSection(subject) {
-            const sections = document.querySelectorAll('.subject-section');
-            sections.forEach(section => {
-                if (section.id === subject) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
-                }
-            });
-        }
+        resultsDiv.appendChild(resultDiv);
+      }
 
-        function filterCards(topic) {
-            const cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (card.classList.contains(topic)) {
-                    card.classList.remove('hidden');
-                    setTimeout(() => card.classList.add('visible'), 50);
-                } else {
-                    card.classList.remove('visible');
-                    setTimeout(() => card.classList.add('hidden'), 300);
-                }
-            });
-        }
-    </script>
+      const percentage = (score / totalQuestions) * 100;
+      document.getElementById('percentage').innerHTML = `<h3>Your Score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</h3>`;
+
+      document.getElementById('result-container').style.display = 'block';
+    }
+
+    // Show the first section by default
+    document.getElementById('section-selector').value = 'section1';
+    showSection('section1');
+  </script>
 </body>
 </html>

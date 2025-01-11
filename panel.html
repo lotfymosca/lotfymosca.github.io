@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub PDF Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 100%;
+            background-color: black;
+            color: antiquewhite;
+        }
+        .container {
+          width: 80%;
+            margin: 0 auto;
+        }
+        .upload{
+          display: grid;
+        }
+        h1{
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .detail{
+          display: grid;
+        }
+        .update{
+          display: grid;
+          margin-top: 40px;
+          padding: 40px;
+          border: 1px solid white;
+          border-radius: 20px;
+          box-shadow: 0px 0px 20px 10px red;
+        }
+        .update button {
+          display: grid;
+          background-color: aqua;
+          border-radius:20px;
+          align-items:center;
+          justify-content: center;
+          justify-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+      <div class="upload">
+        <h1>Upload PDF to GitHub</h1> <hr style="width: 100%;">
+        <!-- File Input and Upload Button -->
+        <input type="file" id="fileInput" accept="application/pdf">
+        <button id="uploadBtn">Upload PDF</button>
+        <hr style="width: 100%;">
+      </div>
+
+      <div class="detail">
+        <!-- Uploaded Link and Copy Button -->
+        <div id="linkContainer" style="display: none;">
+            <p>Uploaded File Link: <span id="fileLink"></span></p>
+            <button id="copyBtn">Copy Link</button>
+            <hr style="width: 100%;">
+        </div>
+      </div>
+      <div  class="update">
+        <!-- Text Input and Update Button Section -->
+        <h2 style="margin-bottom: 20px; border: 1px solid yellow;border-radius: 20px;
+        padding: 10px; text-align: center;">Add pdf in Section - أضافه الملف في قسم الماده</h2>
+        
+        <label style="margin-bottom: 10px; text-align: center;" for="htmlSelect">: اختار قسم الماده </label>
+        <select style="margin-bottom: 20px;" id="htmlSelect">
+            <option value="">Loading...</option>
+        </select>
+
+        <label style="margin-bottom:10px ;text-align: center;" for="pdfLinkInput">: ضع هنا رابط الملف الذي رفعته</label>
+        <input style="margin-bottom: 20px;" type="text" id="pdfLinkInput" placeholder="Paste PDF link here">
+
+        <label for="buttonTextInput" style="margin-bottom: 10px;text-align: center; ">Button Text:</label>
+        <input style="margin-bottom: 20px; " type="text" id="buttonTextInput" placeholder="Enter button text here">
+
+        <button id="updateBtn">Add Link to Selected HTML Page</button>
+      </div>
+    </div>
+
+    <script>
+        const username = "lotfymosca";
+        const repo = "lotfymosca.github.io";
+        const token = "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";
+
+        const uploadBtn = document.getElementById("uploadBtn");
+        const fileInput = document.getElementById("fileInput");
+        const fileLink = document.getElementById("fileLink");
+        const linkContainer = document.getElementById("linkContainer");
+        const copyBtn = document.getElementById("copyBtn");
+        const htmlSelect = document.getElementById("htmlSelect");
+        const pdfLinkInput = document.getElementById("pdfLinkInput");
+        const buttonTextInput = document.getElementById("buttonTextInput");
+        const updateBtn = document.getElementById("updateBtn");
+
+        // Function to fetch existing HTML pages in the repo
+        async function fetchHtmlFiles() {
+            const url = `https://api.github.com/repos/${username}/${repo}/contents/`;
+            const response = await fetch(url, {
+                headers: { Authorization: `token ${token}` },
+            });
+            if (!response.ok) {
+                alert("Error fetching repository contents");
+                return;
+            }
+            const files = await response.json();
+            htmlSelect.innerHTML = "<option value=''>Select a file</option>";
+            files.forEach((file) => {
+                if (file.name.endsWith(".html")) {
+                    const option = document.createElement("option");
+                    option.value = file.path;
+                    option.textContent = file.name;
+                    htmlSelect.appendChild(option);
+                }
+            });
+        }
+
+        // Function to upload the PDF file to GitHub
+        uploadBtn.addEventListener("click", async () => {
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select a PDF file to upload.");
+                return;
+            }
+
+            const url = `https://api.github.com/repos/${username}/${repo}/contents/${file.name}`;
+
+            // Check if the file already exists
+            const existingResponse = await fetch(url, {
+                headers: { Authorization: `token ${token}` },
+            });
+
+            if (existingResponse.ok) {
+                alert("File already exists in the repository.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async () => {
+                const content = btoa(reader.result);
+
+                const response = await fetch(url, {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `token ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        message: `Add ${file.name}`,
+                        content,
+                    }),
+                });
+
+                if (response.ok) {
+                    const pdfUrl = `https://${repo}/${file.name}`;
+                    fileLink.textContent = pdfUrl;
+                    fileLink.dataset.url = pdfUrl;
+                    linkContainer.style.display = "block";
+                } else {
+                    alert("Error uploading file.");
+                }
+            };
+
+            reader.readAsBinaryString(file);
+        });
+
+        // Copy Link Button
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(fileLink.dataset.url).then(() => {
+                alert("Link copied to clipboard");
+            });
+        });
+
+        // Add PDF link to selected HTML page
+        updateBtn.addEventListener("click", async () => {
+            const selectedFile = htmlSelect.value;
+            const pdfLink = pdfLinkInput.value;
+            const buttonText = buttonTextInput.value;
+
+            if (!selectedFile) {
+                alert("Please select an HTML file.");
+                return;
+            }
+
+            if (!pdfLink) {
+                alert("Please paste the PDF link.");
+                return;
+            }
+
+            if (!buttonText) {
+                alert("Please enter the button text.");
+                return;
+            }
+
+            const fileUrl = `https://api.github.com/repos/${username}/${repo}/contents/${selectedFile}`;
+            const fileResponse = await fetch(fileUrl, {
+                headers: { Authorization: `token ${token}` },
+            });
+
+            if (!fileResponse.ok) {
+                alert("Error fetching HTML file.");
+                return;
+            }
+
+            const fileData = await fileResponse.json();
+            const content = atob(fileData.content);
+            const updatedContent = content + `\n<button onclick="window.open('${pdfLink}', '_blank')">${buttonText}</button>`;
+
+            const updateResponse = await fetch(fileUrl, {
+                method: "PUT",
+                headers: {
+                    Authorization: `token ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    message: `Update ${selectedFile} with PDF button`,
+                    content: btoa(updatedContent),
+                    sha: fileData.sha,
+                }),
+            });
+
+            if (updateResponse.ok) {
+                alert("HTML file updated successfully.");
+            } else {
+                alert("Error updating HTML file.");
+            }
+        });
+
+        // Fetch HTML files on page load
+        fetchHtmlFiles();
+    </script>
+</body>
+</html>

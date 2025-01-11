@@ -1,0 +1,726 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lotfy waheed platform</title>
+  <style>
+    body {
+      display: grid;
+      align-items: center;
+      align-content: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #bfbbbb;
+      color: white;
+    }
+
+    .select-menu {
+      display: flex;
+      text-align: right;
+      position: sticky;
+      justify-content: center;
+      top: 0;
+      background-color: #333;
+      font-style: italic;
+      color: orange;
+      padding: 10px;
+      border-bottom: 2px solid #ccc;
+      z-index: 1000;
+      height: 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .select-menu select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 150px;
+      margin-left: 20px;
+    }
+    .content{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        }
+
+    .content section {
+      display: none;
+      padding: 50px 20px;
+      border: 1px solid #ccc;
+      margin-left: 20px;
+      margin-top: 10px;
+      background-color: rgb(210, 177, 138);
+      width:100%;
+      margin-right: 20px;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0px 2px 20px black;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .question {
+      margin-top: 20px;
+    }
+
+    .question h3 {
+      margin: 10px 0;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .submit-btn, .next-btn, .prev-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover, .next-btn:hover, .prev-btn:hover {
+      background-color: #45a049;
+    }
+
+    .result-container {
+      justify-content: center;
+      align-items: center;
+      text-align:left;
+      margin: 20px auto;
+      max-width: 800px;
+      margin-right: 15px;
+      margin-left:15px ;
+      padding: 20px;
+      border: 2px solid #ccc;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0 2px 20px black;
+      display: grid;
+    }
+    .result-container h2{
+      margin: 0;
+      margin-bottom: 5px;
+    }
+    .result-container #hr3{
+      margin-bottom: 50px;
+    }
+
+    .result {
+      margin-bottom: 10px;
+    }
+
+    .correct-answer {
+      color: green;
+    }
+
+    .incorrect-answer {
+      color: red;
+    }
+    h2{
+      margin-left: 0px;
+      margin-top: 4px;
+    }
+    hr{
+      width: 80px;
+      height: 3px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      background-color: #333;
+    }
+    span{
+      font-weight: 800;
+      font-style: italic;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+      margin-top: 10px;
+      margin-left: 20px;
+      font-weight: 800;
+      font-style: oblique;
+      font-size: 22px;
+        }
+        .exp{
+          font-weight: 800;
+          font-style: italic;
+          text-align: center;
+        }
+        .q-title{
+          font-size: 15px;
+          margin-bottom: 100px;
+        }
+  </style>
+</head>
+<body>
+  <div class="select-menu">
+    <h2>Welcome</h2>
+    <select style="display: none;" id="section-selector" onchange="showSection(this.value)">
+      <option value="section1">Section 1</option>
+      <option value="section2">Section 2</option>
+      <option value="section3">Section 3</option>
+      <option value="section4">Section 4</option>
+      <option value="section5">section 5</option>
+      <option value="section6">section 6</option>
+      <option value="section7">section 7</option>
+      <option value="section8">section 8</option>
+      <option value="section9">section 9</option>
+      <option value="section10">section 10</option>
+    </select>
+    <a style="display: none;" href="./index2.html" target="_blank" rel="noopener noreferrer">المقالي</a>
+  </div>
+
+  <div class="content">
+    <section id="section1">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">1.  تعد ......... في التعليم شرطاً اساسياً في التنقل وقابلية المقارنه والجاذبيه وتعزيز تدويل التعليم العالي 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a">المهارة العلميه </label>
+          <label><input type="radio" name="q1" value="b">الجوده</label>
+          <label><input type="radio" name="q1" value="c">مهارة ادارة الوقت</label>
+          <label><input type="radio" name="q1" value="d">ليس مما سبق</label>
+        </div>
+      </div>
+      <button class="next-btn" onclick="nextSection('section2')">Next</button>
+    </section>
+
+    <section id="section2">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">2. توجد عدة برامج عمل لمنظمه اليونيكسو ليس منها ....................
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a">التعليم </label>
+          <label><input type="radio" name="q2" value="b">اقراض الدول   </label>
+          <label><input type="radio" name="q2" value="c">العلوم الاساسيه </label>
+          <label><input type="radio" name="q2" value="d">الثقافه </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section1')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section3')">Next</button>
+    </section>
+
+    <section id="section3">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">3. من انجازات اليونسيف في مجال التعليم ............
+
+        </h3>
+        <div class="options">          
+          <label><input type="radio" name="q3" value="a">الخدمات الصحيه </label>
+          <label><input type="radio" name="q3" value="b">التعمق في التخصص </label>
+          <label><input type="radio" name="q3" value="c">محو الامية من الفتيات </label>
+          <label><input type="radio" name="q3" value="d">بناء المعايير</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section2')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section4')">Next</button>
+    </section>
+
+    <section id="section4">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">4. تتفق منظمه اليونسكو ومنظمه اليونسيف علي مبدا .........</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> مبدا وحدة الامر  </label>
+          <label><input type="radio" name="q4" value="b"> مبدا الانسانية </label>
+          <label><input type="radio" name="q4" value="c"> مبدا تحقيق العداله والمساواة </label>
+          <label><input type="radio" name="q4" value="d"> (ب و  ج) معاً    </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section3')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section5')">Next</button>
+      
+    </section>
+
+    <section id="section5">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 5. تقدم اليونسيف عونها في العديد من المجالات .....</h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> الحصه والتغذية </label>
+          <label><input type="radio" name="q5" value="b">تفير الاجهزة والبيئه الامنه </label>
+          <label><input type="radio" name="q5" value="c">التعليم والتدريب المهني </label>
+          <label><input type="radio" name="q5" value="d"> جميع ما سبق   </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section4')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section6')">next</button>
+    </section>
+
+    <section id="section6">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 6. وكاله متخصصه تتبع منظمه الامم المتحده تاسست عام 1945</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="a"> الالسكو</label> 
+          <label><input type="radio" name="q6" value="b"> اليونسكو   </label>
+          <label><input type="radio" name="q6" value="c">البنك الدولي </label>
+          <label><input type="radio" name="q6" value="d">  ليس مما سبق  </label> </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section5')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section7')">next</button>
+    </section>
+<!-- 
+
+    <section id="section7">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 7.  من ماثله المنظمات الدولية</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="a"> الامم المتحدة للتربية والعوم والثقافه</label>
+          <label><input type="radio" name="q7" value="b"> المنظمة الحقوقيه للتربية والثقافه والعوم</label>
+          <label><input type="radio" name="q7" value="c"> الالسكو</label>
+          <label><input type="radio" name="q7" value="d"> البنك الدولي</label>
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section6')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section8')">next</button>
+    </section>
+    <section id="section8">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 8.  تاسست منظمه اليونسكو عام </h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="a"> 1950</label>
+          <label><input type="radio" name="q8" value="b"> 1945</label>
+          <label><input type="radio" name="q8" value="c"> 1946</label>
+          <label><input type="radio" name="q8" value="d"> 1952</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section7')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section9')">next</button>
+    </section>
+
+    <section id="section9">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 9. منظمة ...... هي منظمة الامم المتحدة للتربية والعلم والثقافه وتتمثل رسالتها في ارسال السلام من خلال التعاون في مجال التربية والعلوم والثقافه</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="a">اليونسكو</label>
+          <label><input type="radio" name="q9" value="b">الالسوك</label>
+          <label><input type="radio" name="q9" value="c">اليونسيف</label>
+          <label><input type="radio" name="q9" value="d">البنك الدولي</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section8')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section10')">next</button>
+    </section>
+    <section id="section10">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 10. من اسباب تاسيس منظمة اليونسكو</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="a">القضاء علي الفقر</label>
+          <label><input type="radio" name="q10" value="b">تحقق التنميه المستدامه</label>
+          <label><input type="radio" name="q10" value="c">اقامه حوار بين الثقافات</label>
+          <label><input type="radio" name="q10" value="d">جميع ما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section9')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section11')">next</button>
+    </section>
+    <section id="section11">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 11. تتراس منظمه .... الفرنسيه اودري ازولاي بعد فوزها في الانتخابات التي اجريت عام 2017 </h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="a">اليونيسكو</label>
+          <label><input type="radio" name="q11" value="b">الالسكو</label>
+          <label><input type="radio" name="q11" value="c">اليونسيف</label>
+          <label><input type="radio" name="q11" value="d">البنك الدولي </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section10')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section12')">next</button>
+    </section>
+
+    <section id="section12">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 12.  تم تشكيل هيئتين دولتين قبل تاسيس منظمة اليونسكو وهما</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q12" value="b">مكتب التربيةالدولي</label>
+          <label><input type="radio" name="q12" value="c">ا وب معاً</label>
+          <label><input type="radio" name="q12" value="d">لا شئ مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section11')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section13')">next</button>
+    </section>
+
+    <section id="section13">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title"> 13. اُسست عصبه الامم .... عام 1922 كمنظمه استشارية مقرها جنيف</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q13" value="b">نكتب التربيةالدولي</label>
+          <label><input type="radio" name="q13" value="c">ا وب معاً</label>
+          <label><input type="radio" name="q13" value="d">لا شئ مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section12')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section14')">next</button>
+    </section>
+
+    <section id="section14">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">14.  تهدف ...... الي تعزيز التبادل الدولي الثقافي والفكري بين العلماء والباحثين والفنانين والمفكرين من مجالات اخري</h3>
+        <div class="options">
+          <label><input type="radio" name="q14" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q14" value="b">مكتب التربيةالدولي</label>
+          <label><input type="radio" name="q14" value="c">ميثاق اليونيسكو</label>
+          <label><input type="radio" name="q14" value="d">اليونيسف</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section13')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section15')">next</button>
+    </section>
+
+
+    <section id="section15">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">15. تم حل اللجنه الدولية للتعاون الفكري عام ..... بعد انتهاء الحرب العالميه الثانيه وحل عصبه الامم</h3>
+        <div class="options">
+          <label><input type="radio" name="q15" value="a">1950</label>
+          <label><input type="radio" name="q15" value="b">1945</label>
+          <label><input type="radio" name="q15" value="c">1946</label>
+          <label><input type="radio" name="q15" value="d">1952</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section14')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section16')">next</button>
+    </section>
+
+
+    <section id="section16">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">16. تم تاسيس ...... من قبل عصبة الامم عام 1925
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q16" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q16" value="b">مكتب التربية الدولي</label>
+          <label><input type="radio" name="q16" value="c">ميثاق اليونيسكو</label>
+          <label><input type="radio" name="q16" value="d">اليونيسف</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section15')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section17')">next</button>
+    </section>
+    
+    <section id="section17">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">17. يهدف ......... الي الاهتمام بالتعليم في دول العالم
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q17" value="a">اللجنه الدولية للتعاون الفكري</label>
+          <label><input type="radio" name="q17" value="b">مكتب التربية الدولي</label>
+          <label><input type="radio" name="q17" value="c">ميثاق اليونيسكو</label>
+          <label><input type="radio" name="q17" value="d">اليونيسف</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section16')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section18')">next</button>
+    </section>
+
+    <section id="section18">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">18.  .............. تم عقد مؤتمران يعتبران الطريق التمهيدي لتاسيس منظمة اليونيسكو 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q18" value="a">مؤتمر الحلفاء للتربية </label>
+          <label><input type="radio" name="q18" value="b">مؤتمر الامم المتحده </label>
+          <label><input type="radio" name="q18" value="c"> أ و ب معاً</label>
+          <label><input type="radio" name="q18" value="d">لا شيء مما سبق</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section17')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section19')">next</button>
+    </section>
+    
+    <section id="section19">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">19. ضم مؤتمر الحلفاء للتربية كل من ..... وهي الدول التي حاربت ضد المانيا النازية  
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q19" value="a">مؤتمر الحلفاء للتربية</label>
+          <label><input type="radio" name="q19" value="b">مؤتمر الامم المتحده </label>
+          <label><input type="radio" name="q19" value="c">المؤتمر العام</label>
+          <label><input type="radio" name="q19" value="d">المنتدي الاقتصادي العالمي </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section18')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section20')">next</button>
+    </section>
+        
+    <section id="section20">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">20.ضم مؤتمر الحلفاء للتربية كل من ..... وهي الدول التي حاربت ضد المانيا النازية  
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q20" value="a">الولايات المتحده الامريكيه </label>
+          <label><input type="radio" name="q20" value="b">الاتحاد السوفيتي</label>
+          <label><input type="radio" name="q20" value="c"> بريطانيا وفرنسا </label>
+          <label><input type="radio" name="q20" value="d">جميع ما سبق </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section19')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section21')">next</button>
+    </section>
+    
+    
+    <section id="section21">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">21. تم عقد ..... في لندن في نوفمبر 1945 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q21" value="a">مؤتمر الحلفاء للتربية </label>
+          <label><input type="radio" name="q21" value="b">مؤتمر الامم المتحده </label>
+          <label><input type="radio" name="q21" value="c"> المؤتمر العام </label>
+          <label><input type="radio" name="q21" value="d">المنتدي الاقتصادي العالمي </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section20')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section22')">next</button>
+    </section>
+    
+    
+    <section id="section22">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">22. ضم المؤتمر الامم المتحده ممثله عن ...... دولة اتفقت علي تاسيس منظمة تعني بالتربية 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q22" value="a">30</label>
+          <label><input type="radio" name="q22" value="b">20</label>
+          <label><input type="radio" name="q22" value="c"> 40 </label>
+          <label><input type="radio" name="q22" value="d">35</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section21')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section23')">next</button>
+    </section>
+    
+    <section id="section23">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">23.
+          تعزز منظمة ..... البرامج والسياسات العلميه باعتبار منابر لتحقيق التنميه وضمان التعاون  </h3>
+        <div class="options">
+          <label><input type="radio" name="q23" value="a">اليونيسكو </label>
+          <label><input type="radio" name="q23" value="b">الالسكو </label>
+          <label><input type="radio" name="q23" value="c"> اليونيسف </label>
+          <label><input type="radio" name="q23" value="d">البنك الدولي</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section22')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section24')">next</button>
+    </section>
+    
+    
+    <section id="section24">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">24.
+          تتمثل برامج منظمة اليونيسكو في ...... برامج اساسيه 
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q24" value="a">ثلاثه </label>
+          <label><input type="radio" name="q24" value="b">خمس </label>
+          <label><input type="radio" name="q24" value="c"> اربعة </label>
+          <label><input type="radio" name="q24" value="d">سبعه</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section23')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section25')">next</button>
+    </section>
+
+    
+    <section id="section25">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">25.   برامج عمل منظمة اليونسكو تتمثل في ............
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q25" value="a">التربية والتعليم  </label>
+          <label><input type="radio" name="q25" value="b"> العلوم الطبيعيه</label>
+          <label><input type="radio" name="q25" value="c"> الثقافه والاتصالات والاعلام </label>
+          <label><input type="radio" name="q25" value="d">جميع ما سبق </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section24')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section26')">next</button>
+    </section>
+    
+    <section id="section26">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">26.   تدعم ...... العديد من المشاريع مثل محو الاميه والتدريب التقني ,برامج تاهيل وتدريب المعلمين
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q26" value="a">اليونيكسو </label>
+          <label><input type="radio" name="q26" value="b"> الالسكو </label>
+          <label><input type="radio" name="q26" value="c">اليونيسف </label>
+          <label><input type="radio" name="q26" value="d">البنك الدولي</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section25')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section27')">next</button>
+    </section>
+    
+    <section id="section27">
+      <h2>2024 منظمات دولية</h2>
+      <div class="question">
+        <h3 class="q-title">27.    تتالف اليونيسكو من الهيئات التاليه ..............
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q27" value="a">المؤتمر العام  </label>
+          <label><input type="radio" name="q27" value="b"> المجلس التفيذي  </label>
+          <label><input type="radio" name="q27" value="c">الهيئه التنفيذيه العامه  </label>
+          <label><input type="radio" name="q27" value="d">جميع ما سبق </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section26')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section28')">next</button>
+    </section>
+    
+    
+
+
+
+-->
+
+<section id="section7">
+  <p>اضغط للحصول علي النتيجه النهائية</p>
+    <button class="submit-btn" onclick="calculateResult()">Submit</button>
+  </section>
+  </div>
+
+  
+
+
+
+
+  <center>
+<div class="result-box">
+  <div class="result-container" id="result-container">
+    <h2>Quiz Results</h2>
+    <hr id="hr3">
+    <div id="results"></div>
+    <div id="percentage"></div>
+  </div>
+</div>
+</center>
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      // Show the selected section
+      const selectedSection = document.getElementById(sectionId);
+      if (selectedSection) {
+        selectedSection.classList.add('active');
+      }
+    }
+
+    function nextSection(nextSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const nextSection = document.getElementById(nextSectionId);
+      if (nextSection) {
+        nextSection.classList.add('active');
+      }
+    }
+
+    function prevSection(prevSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const prevSection = document.getElementById(prevSectionId);
+      if (prevSection) {
+        prevSection.classList.add('active');
+      }
+    }
+
+    function calculateResult() {
+      const correctAnswers = {
+        q1: { answer: 'b',},
+        q2: { answer: 'b',},
+        q3: { answer: 'c',},
+        q4: { answer: 'd',},
+        q5: { answer: 'd',},
+        q6: { answer: 'b',},
+
+
+
+
+
+
+      };
+
+      let score = 0;
+      const totalQuestions = Object.keys(correctAnswers).length;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      for (let question in correctAnswers) {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        const userAnswer = selectedOption ? selectedOption.value : "Not answered";
+        const correctAnswer = correctAnswers[question].answer;
+        const explanation = correctAnswers[question].explanation;
+
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result');
+
+        if (userAnswer === correctAnswer) {
+          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='correct-answer'>${userAnswer}</span> (Correct). <br> <hr>`;
+          score++;
+        } else {
+          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='incorrect-answer'>${userAnswer}</span><br>, Correct Answer: <span class='correct-answer'>(${correctAnswer})</span>.<hr>`;
+        }
+
+        resultsDiv.appendChild(resultDiv);
+      }
+
+      const percentage = (score / totalQuestions) * 100;
+      document.getElementById('percentage').innerHTML = `<h3>Your Score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</h3>`;
+
+      document.getElementById('result-container').style.display = 'block';
+    }
+
+    // Show the first section by default
+    document.getElementById('section-selector').value = 'section1';
+    showSection('section1');
+  </script>
+</body>
+</html>

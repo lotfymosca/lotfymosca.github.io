@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lotfy Waheed Platform</title>
+  <style>
+    body {
+      display: grid;
+      align-items: center;
+      align-content: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #bfbbbb;
+      color: white;
+    }
+
+    .select-menu {
+      display: flex;
+      text-align: right;
+      position: sticky;
+      justify-content: center;
+      top: 0;
+      background-color: #333;
+      font-style: italic;
+      color: orange;
+      padding: 10px;
+      border-bottom: 2px solid #ccc;
+      z-index: 1000;
+      height: 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .select-menu select {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      max-width: 150px;
+      margin-left: 20px;
+    }
+    .content{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        }
+
+    .content section {
+      display: none;
+      padding: 50px 20px;
+      border: 1px solid #ccc;
+      margin-left: 20px;
+      margin-top: 10px;
+      background-color: rgb(210, 177, 138);
+      width:100%;
+      margin-right: 20px;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0px 2px 20px black;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .question {
+      margin-top: 20px;
+    }
+
+    .question h3 {
+      margin: 10px 0;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .submit-btn, .next-btn, .prev-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover, .next-btn:hover, .prev-btn:hover {
+      background-color: #45a049;
+    }
+
+    .result-container {
+      justify-content: center;
+      align-items: center;
+      text-align:left;
+      margin: 20px auto;
+      max-width: 800px;
+      margin-right: 15px;
+      margin-left:15px ;
+      padding: 20px;
+      border: 2px solid #ccc;
+      color: black;
+      border-radius: 5px;
+      box-shadow: 0 2px 20px black;
+      display: grid;
+    }
+    .result-container h2{
+      margin: 0;
+      margin-bottom: 5px;
+    }
+    .result-container #hr3{
+      margin-bottom: 50px;
+    }
+
+    .result {
+      margin-bottom: 10px;
+    }
+
+    .correct-answer {
+      color: green;
+    }
+
+    .incorrect-answer {
+      color: red;
+    }
+    h2{
+      margin-left: 0px;
+      margin-top: 4px;
+    }
+    hr{
+      width: 80px;
+      height: 3px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      background-color: #333;
+    }
+    span{
+      font-weight: 800;
+      font-style: italic;
+    }
+    a{
+      text-decoration: none;
+      color: white;
+      margin-top: 10px;
+      margin-left: 20px;
+      font-weight: 800;
+      font-style: oblique;
+      font-size: 22px;
+        }
+        .exp{
+          font-weight: 800;
+          font-style: italic;
+          text-align: center;
+        }
+        .q-title{
+          font-size: 15px;
+          margin-bottom: 100px;
+        }
+        img{
+          mix-blend-mode: multiply;
+          margin-bottom: -10px;
+        }
+        #hr4{
+          width: 90%;
+          margin-top: 10px;
+          height: 1px;
+          border: 1px solid black;
+        }
+  </style>
+</head>
+<body>
+
+ <div class="select-menu">
+    <h2>Welcome</h2>
+    <select style="display: none;" id="section-selector" onchange="showSection(this.value)">
+      <option value="section1">Section 1</option>
+      <option value="section2">Section 2</option>
+      <option value="section3">Section 3</option>
+      <option value="section4">Section 4</option>
+      <option value="section5">section 5</option>
+      <option value="section6">section 6</option>
+      <option value="section7">section 7</option>
+      <option value="section8">section 8</option>
+      <option value="section9">section 9</option>
+      <option value="section10">section 10</option>
+    </select>
+    <a style="display: none;" href="./index2.html" target="_blank" rel="noopener noreferrer">المقالي</a>
+  </div>
+
+  <div class="content">
+    <section id="section1">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">1. If the value of eccentricity e = 0, then what is the name of the conic?</h3>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a">ellipse</label>
+          <label><input type="radio" name="q1" value="b">parabola</label>
+          <label><input type="radio" name="q1" value="c">hyperbola </label>
+          <label><input type="radio" name="q1" value="d">none  </label>
+        </div>
+      </div>
+      <button class="next-btn" onclick="nextSection('section2')">Next</button>
+    </section>
+
+    <section id="section2">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">2. If the distance from a point to the focus is 3 units and the distance from the directrix is 3 units, then the
+          conic section called……..</h3>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a">ellipse</label>
+          <label><input type="radio" name="q2" value="b">parabola </label>
+          <label><input type="radio" name="q2" value="c">circle </label>
+          <label><input type="radio" name="q2" value="d">hyperbola  </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section1')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section3')">Next</button>
+    </section>
+
+    <section id="section3">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">3. The equation of the line whose intercepts on the x and y axes are respectively 5 and -3 is</h3>
+        <div class="options">          
+          <label><input type="radio" name="q3" value="a">3 x + 5 y + 15</label>
+          <label><input type="radio" name="q3" value="b">3 x + 5 y - 15 </label>
+          <label><input type="radio" name="q3" value="c"> 3 x - 5 y + 15 </label>
+          <label><input type="radio" name="q3" value="d"> 3 x - 5 y – 15</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section2')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section4')">Next</button>
+    </section>
+
+    <section id="section4">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">4. The midpoint of two points (7,1) and (-1,5)</h3>
+        <div class="options">
+          <label><input type="radio" name="q4" value="a"> (3,3)  </label>
+          <label><input type="radio" name="q4" value="b"> (4,-2) </label>
+          <label><input type="radio" name="q4" value="c"> (-4,2)  </label>
+          <label><input type="radio" name="q4" value="d">  None  </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section3')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section5')">Next</button>
+      
+    </section>
+
+    <section id="section5">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 5. Slope of the segment between two points (7,1) and (-1,5) </h3>
+        <div class="options">
+          <label><input type="radio" name="q5" value="a"> -2</label>
+          <label><input type="radio" name="q5" value="b"> -2/3 </label>
+          <label><input type="radio" name="q5" value="c">-3/2 </label>
+          <label><input type="radio" name="q5" value="d"> -1/2   </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section4')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section6')">next</button>
+    </section>
+
+    <section id="section6">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 6.  If 𝑝 = 5, 𝜔 = 𝜋/6, then equation of normal form of straight line</h3>
+        <div class="options">
+          <label><input type="radio" name="q6" value="a"> 𝑥+ √3 y - 10 = 0</label> 
+          <label><input type="radio" name="q6" value="b"> √3 𝑥+ y + 10 = 0</label>
+          <label><input type="radio" name="q6" value="c">√3 𝑥+ y - 10 = 0 </label>
+          <label><input type="radio" name="q6" value="d"> 𝑥+ √3 y + 10 = 0</label> </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section5')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section7')">next</button>
+    </section>
+
+    <section id="section7">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 7. The distance from the line 8x+15y - 24 = 0 to point (-2,-3)</h3>
+        <div class="options">
+          <label><input type="radio" name="q7" value="a"> 4    </label>
+          <label><input type="radio" name="q7" value="b"> 5   </label>
+          <label><input type="radio" name="q7" value="c"> 8</label>
+          <label><input type="radio" name="q7" value="d"> 1/5 </label>
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section6')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section8')">next</button>
+    </section>
+    <section id="section8">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 8.  If 𝐴 𝑥²+ 𝐵 𝑥𝑦 + 𝐶 𝑦² = 0 represents equation of two straight lines, then the angle between two lines </h3>
+        <div class="options">
+          <label><input type="radio" name="q8" value="a"><img src="./q8ansa.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q8" value="b"><img src="./q8ansb.PNG" alt="" srcset=""> </label>
+          <label><input type="radio" name="q8" value="c"><img src="./q8ansc.PNG" alt="" srcset=""> </label>
+          <label><input type="radio" name="q8" value="d"><img src="./q8ansd.PNG" alt="" srcset=""> </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section7')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section9')">next</button>
+    </section>
+
+    <section id="section9">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 9. Equation 𝑥² + 2ℎ𝑥𝑦 + 𝑏𝑦² + 2𝑔𝑥 + 2𝑓𝑦 + 𝑐 = 0, represents two straight lines if</h3>
+        <div class="options">
+          <label><input type="radio" name="q9" value="a"><img src="./q9ansa.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q9" value="b"><img src="./q9ansb.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q9" value="c"><img src="./q9ansc.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q9" value="d"><img src="./q9ansd.PNG" alt="" srcset=""></label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section8')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section10')">next</button>
+    </section>
+    <section id="section10">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 10. . The formulas for the rotation of the axes through an angle θ are</h3>
+        <div class="options">
+          <label><input type="radio" name="q10" value="a"><img src="./q10ansa.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q10" value="b"><img src="./q10ansb.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q10" value="c"><img src="./q10ansc.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q10" value="d"><img src="./q10ansd.PNG" alt="" srcset=""></label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section9')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section11')">next</button>
+    </section>
+    <section id="section11">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 11. The center of circle 2x² +2y²- A x - B y + C = 0 is </h3>
+        <div class="options">
+          <label><input type="radio" name="q11" value="a">(-A,-B) </label>
+          <label><input type="radio" name="q11" value="b">(-A,-B) </label>
+          <label><input type="radio" name="q11" value="c">(A/4,B/4)</label>
+          <label><input type="radio" name="q11" value="d">(A/2, B/2)</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section10')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section12')">next</button>
+    </section>
+
+    <section id="section12">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 12. The radius in the previous circle is</h3>
+        <div class="options">
+          <label><input type="radio" name="q12" value="a"><img src="./q12ansa.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q12" value="b"><img src="./q12ansb.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q12" value="c"><img src="./q12ansc.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q12" value="d"><img src="./q12ansd.PNG" alt="" srcset=""></label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section11')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section13')">next</button>
+    </section>
+
+    <section id="section13">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> 13. The vertices in conic section &nbsp;9𝑥² -16𝑦² = 144 are</h3>
+        <div class="options">
+          <label><input type="radio" name="q13" value="a">(0, ±4)</label>
+          <label><input type="radio" name="q13" value="b">(±3,0)</label>
+          <label><input type="radio" name="q13" value="c">(±4,0)</label>
+          <label><input type="radio" name="q13" value="d">(0, ±3)</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section12')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section14')">next</button>
+    </section>
+
+    <section id="section14">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">14. In the previous conic section </h3>
+        <div class="options">
+          <label><input type="radio" name="q14" value="a">𝑒 = 5/4</label>
+          <label><input type="radio" name="q14" value="b">𝑒 = 4/5</label>
+          <label><input type="radio" name="q14" value="c">𝑒 = 3/4</label>
+          <label><input type="radio" name="q14" value="d">𝑒 = 4/3</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section13')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section15')">next</button>
+    </section>
+
+
+    <section id="section15">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">15. Then, two foci are</h3>
+        <div class="options">
+          <label><input type="radio" name="q15" value="a">(±5,0)</label>
+          <label><input type="radio" name="q15" value="b">(0, ±5) </label>
+          <label><input type="radio" name="q15" value="c"> (±16/5 ,0)</label>
+          <label><input type="radio" name="q15" value="d">(0, ±16/3)</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section14')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section16')">next</button>
+    </section>
+
+
+    <section id="section16">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">16. And two directrixes equations are:  
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q16" value="a">𝑥 = ± 16/5</label>
+          <label><input type="radio" name="q16" value="b">𝑥 = ± 5/16  </label>
+          <label><input type="radio" name="q16" value="c"> 𝑦 = ± 5</label>
+          <label><input type="radio" name="q16" value="d">𝑦 = ± 16/5</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section15')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section17')">next</button>
+    </section>
+    
+    <section id="section17">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">17. And equation of two Asyomptites equations are……
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q17" value="a">𝑥 = ± 3/4</label>
+          <label><input type="radio" name="q17" value="b">𝑦 = ± 3/4 𝑥 </label>
+          <label><input type="radio" name="q17" value="c">𝑦 = ± 4/3 𝑥</label>
+          <label><input type="radio" name="q17" value="d">𝑦 = ± 3/4</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section16')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section18')">next</button>
+    </section>
+
+    <section id="section18">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">18.  . The parabola (𝑥 + 3)² = − 16 (𝑦 − 5) 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q18" value="a">  Symmetrical about 𝑥 −axis and opens to left  </label>
+          <label><input type="radio" name="q18" value="b">  Symmetrical about 𝑦 − axis and opens downward  </label>
+          <label><input type="radio" name="q18" value="c">  Symmetrical about 𝑥 − axis and opens to right  </label>
+          <label><input type="radio" name="q18" value="d">  Symmetrical about 𝑦 − axis and opens upward  </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section17')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section19')">next</button>
+    </section>
+    
+    <section id="section19">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">19. The equation of a parabola having the origin as its vertex and focus (-4/3,0) is:  
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q19" value="a"><img src="./q19ansa.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q19" value="b"><img src="./q19ansb.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q19" value="c"><img src="./q19ansc.PNG" alt="" srcset=""></label>
+          <label><input type="radio" name="q19" value="d"><img src="./q19ansd.PNG" alt="" srcset=""></label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section18')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section20')">next</button>
+    </section>
+        
+    <section id="section20">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">20. The equation &nbsp;&nbsp;4𝑥² +9𝑦² -48𝑥 +72𝑦 +144 = 0 represents a
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q20" value="a">circle</label>
+          <label><input type="radio" name="q20" value="b">parabola</label>
+          <label><input type="radio" name="q20" value="c">hyperbola</label>
+          <label><input type="radio" name="q20" value="d">ellipse</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section19')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section21')">next</button>
+    </section>
+    
+    
+    <section id="section21">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">21. The center of the previous question is 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q21" value="a">(-36,-16)</label>
+          <label><input type="radio" name="q21" value="b">(-6, 4)</label>
+          <label><input type="radio" name="q21" value="c">(36,16)</label>
+          <label><input type="radio" name="q21" value="d">(6,-4)</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section20')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section22')">next</button>
+    </section>
+    
+    
+    <section id="section22">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">22. An ellipse having foci at (0,1) and (4,1), then the center is 
+        </h3>
+        <div class="options">
+          <label><input type="radio" name="q22" value="a">(0,0)</label>
+          <label><input type="radio" name="q22" value="b">(2, 1/2)</label>
+          <label><input type="radio" name="q22" value="c"> (2,1) </label>
+          <label><input type="radio" name="q22" value="d">(4,0) </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section21')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section23')">next</button>
+    </section>
+    
+    <section id="section23">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">23.
+          If the eccentricity 𝑒 = 0, then the conic section is…….  </h3>
+        <div class="options">
+          <label><input type="radio" name="q23" value="a">ellipse </label>
+          <label><input type="radio" name="q23" value="b">parabola </label>
+          <label><input type="radio" name="q23" value="c"> hyperbola </label>
+          <label><input type="radio" name="q23" value="d"> none</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section22')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section24')">next</button>
+    </section>
+    
+    
+    <section id="section24">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">24.
+          Equation of circle with diameter points A = (5,-1), B = (-3,7) ............
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q24" value="a"><img src="./q24ansa.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q24" value="b"><img src="./q24ansb.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q24" value="c"><img src="./q24ansc.PNG" alt="" srcset=""></label><hr id="hr4">
+          <label><input type="radio" name="q24" value="d"><img src="./q24ansd.PNG" alt="" srcset=""></label><hr id="hr4">
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section23')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section25')">next</button>
+    </section>
+
+    
+    <section id="section25">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title"> <img src="./letter1.PNG" alt="" srcset=""  >
+         </h3>
+        <div class="options">
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section24')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section26')">next</button>
+    </section>
+    
+    <section id="section26">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">. <img src="./letter2.PNG" alt="" srcset="">
+         </h3>
+        <div class="options">
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section25')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section27')">next</button>
+    </section>
+    
+    <section id="section27">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">. <img src="./letter3.PNG" alt="" srcset="">
+         </h3>
+        <div class="options">
+
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section26')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section28')">next</button>
+    </section>
+<!--
+    
+    <section id="section25">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">25.   برامج عمل منظمة اليونسكو تتمثل في ............
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q25" value="a">التربية والتعليم  </label>
+          <label><input type="radio" name="q25" value="b"> العلوم الطبيعيه</label>
+          <label><input type="radio" name="q25" value="c"> الثقافه والاتصالات والاعلام </label>
+          <label><input type="radio" name="q25" value="d">جميع ما سبق </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section24')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section26')">next</button>
+    </section>
+    
+    <section id="section26">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">26.   تدعم ...... العديد من المشاريع مثل محو الاميه والتدريب التقني ,برامج تاهيل وتدريب المعلمين
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q26" value="a">اليونيكسو </label>
+          <label><input type="radio" name="q26" value="b"> الالسكو </label>
+          <label><input type="radio" name="q26" value="c">اليونيسف </label>
+          <label><input type="radio" name="q26" value="d">البنك الدولي</label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section25')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section27')">next</button>
+    </section>
+    
+    <section id="section27">
+      <h2>Analytical Geometry</h2>
+      <div class="question">
+        <h3 class="q-title">27.    تتالف اليونيسكو من الهيئات التاليه ..............
+         </h3>
+        <div class="options">
+          <label><input type="radio" name="q27" value="a">المؤتمر العام  </label>
+          <label><input type="radio" name="q27" value="b"> المجلس التفيذي  </label>
+          <label><input type="radio" name="q27" value="c">الهيئه التنفيذيه العامه  </label>
+          <label><input type="radio" name="q27" value="d">جميع ما سبق </label>
+        </div>
+      </div>
+      <button class="prev-btn" onclick="prevSection('section26')">Previous</button>
+      <button class="next-btn" onclick="nextSection('section28')">next</button>
+    </section>
+    
+    
+
+
+
+-->
+
+<section id="section28">
+  <p>اضغط للحصول علي النتيجه النهائية</p>
+    <button class="submit-btn" onclick="calculateResult()">Submit</button>
+  </section>
+  </div>
+
+  
+
+
+
+
+  <center>
+<div class="result-box">
+  <div class="result-container" id="result-container">
+    <h2>Quiz Results</h2>
+    <hr id="hr3">
+    <div id="results"></div>
+    <div id="percentage"></div>
+  </div>
+</div>
+</center>
+
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const selectedSection = document.getElementById(sectionId);
+      if (selectedSection) {
+        selectedSection.classList.add('active');
+      }
+    }
+
+    function nextSection(nextSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const nextSection = document.getElementById(nextSectionId);
+      if (nextSection) {
+        nextSection.classList.add('active');
+      }
+    }
+
+    function prevSection(prevSectionId) {
+      const sections = document.querySelectorAll('.content section');
+      sections.forEach(section => section.classList.remove('active'));
+
+      const prevSection = document.getElementById(prevSectionId);
+      if (prevSection) {
+        prevSection.classList.add('active');
+      }
+    }
+
+    function calculateResult() {
+      const correctAnswers = {
+        q1: { answer: 'b' },
+        q2: { answer: 'a' },
+        q3: { answer: 'd' },
+        q4: { answer: 'a' },
+        q5: { answer: 'b' },
+        q6: { answer: 'c' },
+        q7: { answer: 'a' },
+        q8: { answer: 'b' },
+        q9: { answer: 'a' },
+        q10: { answer: 'd' },
+        q11: { answer: 'a' },
+        q12: { answer: 'c' },
+        q13: { answer: 'a' },
+        q14: { answer: 'a' },
+        q15: { answer: 'c' },
+        q16: { answer: 'b' },
+        q17: { answer: 'b' },
+        q18: { answer: 'c' },
+        q19: { answer: 'a' },
+        q20: { answer: 'd' },
+        q21: { answer: 'b' },
+        q22: { answer: 'c' },
+        q23: { answer: 'a' },
+        q24: { answer: 'b' },
+        q25: { answer: 'd' },
+        q26: { answer: 'a' },
+        q27: { answer: 'd' },
+      };
+
+      let score = 0;
+      const totalQuestions = Object.keys(correctAnswers).length;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+
+      for (let question in correctAnswers) {
+        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+        const userAnswer = selectedOption ? selectedOption.value : "Not answered";
+        const correctAnswer = correctAnswers[question].answer;
+        const questionTitle = document.querySelector(`[name="${question}"]`).closest('.question').querySelector('.q-title').innerText;
+
+        const resultDiv = document.createElement('div');
+        resultDiv.classList.add('result');
+
+        if (userAnswer === correctAnswer) {
+          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='correct-answer'>${userAnswer}</span> (Correct). <br> <hr>`;
+          score++;
+        } else {
+          resultDiv.innerHTML = `
+            <strong>${question.toUpperCase()}</strong>: <br>
+            <strong>Question:</strong> ${questionTitle} <br>
+            <strong>Your Answer:</strong> <span class='incorrect-answer'>${userAnswer}</span> <br>
+            <strong>Correct Answer:</strong> <span class='correct-answer'>${correctAnswer}</span> <br>
+            <hr>
+          `;
+        }
+
+        resultsDiv.appendChild(resultDiv);
+      }
+
+      const percentage = (score / totalQuestions) * 100;
+      document.getElementById('percentage').innerHTML = `<h3>Your Score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</h3>`;
+
+      document.getElementById('result-container').style.display = 'block';
+    }
+
+    // Show the first section by default
+    document.getElementById('section-selector').value = 'section1';
+    showSection('section1');
+  </script>
+</body>
+</html>

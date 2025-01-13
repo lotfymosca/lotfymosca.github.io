@@ -680,91 +680,104 @@
   <div class="result-container" id="result-container">
     <h2>Quiz Results</h2>
     <hr id="hr3">
-    <div id="results"></div>
+    <div id="results">
+    </div>
     <div id="percentage"></div>
   </div>
 </div>
 </center>
 
-  <script>
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.content section');
-      sections.forEach(section => section.classList.remove('active'));
+  <script>function showSection(sectionId) {
+    const sections = document.querySelectorAll('.content section');
+    sections.forEach(section => section.classList.remove('active'));
 
-      const selectedSection = document.getElementById(sectionId);
-      if (selectedSection) {
-        selectedSection.classList.add('active');
-      }
+    const selectedSection = document.getElementById(sectionId);
+    if (selectedSection) {
+      selectedSection.classList.add('active');
     }
+  }
 
-    function nextSection(nextSectionId) {
-      const sections = document.querySelectorAll('.content section');
-      sections.forEach(section => section.classList.remove('active'));
+  function nextSection(nextSectionId) {
+    const sections = document.querySelectorAll('.content section');
+    sections.forEach(section => section.classList.remove('active'));
 
-      const nextSection = document.getElementById(nextSectionId);
-      if (nextSection) {
-        nextSection.classList.add('active');
-      }
+    const nextSection = document.getElementById(nextSectionId);
+    if (nextSection) {
+      nextSection.classList.add('active');
     }
+  }
 
-    function prevSection(prevSectionId) {
-      const sections = document.querySelectorAll('.content section');
-      sections.forEach(section => section.classList.remove('active'));
+  function prevSection(prevSectionId) {
+    const sections = document.querySelectorAll('.content section');
+    sections.forEach(section => section.classList.remove('active'));
 
-      const prevSection = document.getElementById(prevSectionId);
-      if (prevSection) {
-        prevSection.classList.add('active');
-      }
+    const prevSection = document.getElementById(prevSectionId);
+    if (prevSection) {
+      prevSection.classList.add('active');
     }
+  }
 
-    function calculateResult() {
-      const correctAnswers = {
-        q1: { answer: 'b' },
-        q2: { answer: 'a' },
-        q3: { answer: 'd' },
-        q4: { answer: 'a' },
-        q5: { answer: 'b' },
-        q6: { answer: 'c' },
-        q7: { answer: 'a' },
-        q8: { answer: 'b' },
-        q9: { answer: 'a' },
-        q10: { answer: 'd' },
-        q11: { answer: 'a' },
-        q12: { answer: 'c' },
-        q13: { answer: 'a' },
-        q14: { answer: 'a' },
-        q15: { answer: 'c' },
-        q16: { answer: 'b' },
-        q17: { answer: 'b' },
-        q18: { answer: 'c' },
-        q19: { answer: 'a' },
-        q20: { answer: 'd' },
-        q21: { answer: 'b' },
-        q22: { answer: 'c' },
-        q23: { answer: 'a' },
-        q24: { answer: 'b' },
-        q25: { answer: 'd' },
-        q26: { answer: 'a' },
-        q27: { answer: 'd' },
-      };
+  function calculateResult() {
+    const correctAnswers = {
+      q1: { answer: 'd' },
+      q2: { answer: 'b' },
+      q3: { answer: 'd' },
+      q4: { answer: 'a' },
+      q5: { answer: 'b' },
+      q6: { answer: 'c' },
+      q7: { answer: 'b' },
+      q8: { answer: 'a' },
+      q9: { answer: 'd' },
+      q10: { answer: 'a' },
+      q11: { answer: 'c' },
+      q12: { answer: 'c' },
+      q13: { answer: 'c' },
+      q14: { answer: 'a' },
+      q15: { answer: 'a' },
+      q16: { answer: 'a' },
+      q17: { answer: 'b' },
+      q18: { answer: 'b' },
+      q19: { answer: 'b' },
+      q20: { answer: 'd' },
+      q21: { answer: 'c' },
+      q22: { answer: 'd' },
+      q23: { answer: 'd' },
+      q24: { answer: 'd' },
+    };
 
-      let score = 0;
-      const totalQuestions = Object.keys(correctAnswers).length;
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = '';
+    let score = 0;
+    const totalQuestions = Object.keys(correctAnswers).length;
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
 
-      for (let question in correctAnswers) {
-        const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
-        const userAnswer = selectedOption ? selectedOption.value : "Not answered";
-        const correctAnswer = correctAnswers[question].answer;
-        const questionTitle = document.querySelector(`[name="${question}"]`).closest('.question').querySelector('.q-title').innerText;
+    for (let question in correctAnswers) {
+      const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+      const userAnswer = selectedOption ? selectedOption.value : "Not answered";
+      const correctAnswer = correctAnswers[question].answer;
+      const questionTitle = document.querySelector(`[name="${question}"]`).closest('.question').querySelector('.q-title').innerText;
 
-        const resultDiv = document.createElement('div');
-        resultDiv.classList.add('result');
+      const resultDiv = document.createElement('div');
+      resultDiv.classList.add('result');
 
-        if (userAnswer === correctAnswer) {
-          resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='correct-answer'>${userAnswer}</span> (Correct). <br> <hr>`;
-          score++;
+      if (userAnswer === correctAnswer) {
+        resultDiv.innerHTML = `<strong>${question.toUpperCase()}</strong>: Your Answer: <span class='correct-answer'>${userAnswer}</span> (Correct). <br> <hr>`;
+        score++;
+      } else {
+        // Check if the question is q25, q26, or q27
+        if (question === 'q25' || question === 'q26' || question === 'q27') {
+          const correctImage = document.createElement('img');
+          correctImage.src = correctAnswers[question].image;
+          correctImage.style.width = '150px';
+          correctImage.style.height = '150px';
+
+          resultDiv.innerHTML = `
+            <strong>${question.toUpperCase()}</strong>: <br>
+            <strong>Question:</strong> ${questionTitle} <br>
+            <strong>Your Answer:</strong> <span class='incorrect-answer'>${userAnswer}</span> <br>
+            <strong>Correct Answer:</strong> <br>
+          `;
+          resultDiv.appendChild(correctImage);
+          resultDiv.innerHTML += `<hr>`;
         } else {
           resultDiv.innerHTML = `
             <strong>${question.toUpperCase()}</strong>: <br>
@@ -774,19 +787,42 @@
             <hr>
           `;
         }
-
-        resultsDiv.appendChild(resultDiv);
       }
 
-      const percentage = (score / totalQuestions) * 100;
-      document.getElementById('percentage').innerHTML = `<h3>Your Score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</h3>`;
-
-      document.getElementById('result-container').style.display = 'block';
+      resultsDiv.appendChild(resultDiv);
     }
 
-    // Show the first section by default
-    document.getElementById('section-selector').value = 'section1';
-    showSection('section1');
+    // Add images to the result div
+    const images = [
+      './ansq2.PNG', // Replace with your image URLs
+      'https://via.placeholder.com/150',
+      'https://via.placeholder.com/150'
+    ];
+
+    const imageContainer = document.createElement('div');
+    imageContainer.style.display = 'flex';
+    imageContainer.style.justifyContent = 'space-around';
+    imageContainer.style.marginTop = '20px';
+
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.width = '150px';
+      img.style.height = '150px';
+      imageContainer.appendChild(img);
+    });
+
+    resultsDiv.appendChild(imageContainer);
+
+    const percentage = (score / totalQuestions) * 100;
+    document.getElementById('percentage').innerHTML = `<h3>Your Score: ${score}/${totalQuestions} (${percentage.toFixed(2)}%)</h3>`;
+
+    document.getElementById('result-container').style.display = 'block';
+  }
+
+  // Show the first section by default
+  document.getElementById('section-selector').value = 'section1';
+  showSection('section1');
   </script>
 </body>
 </html>
